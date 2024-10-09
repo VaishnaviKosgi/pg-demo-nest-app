@@ -9,6 +9,7 @@ module.exports = {
     '@typescript-eslint/eslint-plugin', // Enables TypeScript-specific linting rules
     'prettier', // Integrates Prettier for code formatting
   ],
+  
   extends: [
     'plugin:@typescript-eslint/recommended', // Uses the recommended rules from the @typescript-eslint/eslint-plugin
     'plugin:prettier/recommended', // Enables eslint-plugin-prettier and displays Prettier errors as ESLint errors

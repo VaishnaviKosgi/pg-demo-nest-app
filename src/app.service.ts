@@ -6,4 +6,5 @@ export class AppService {
     const unusedVar = 'This is not used';
     return 'PG Demo app!';
   }
+  
 }

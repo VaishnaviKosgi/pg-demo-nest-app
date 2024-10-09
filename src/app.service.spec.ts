@@ -27,7 +27,8 @@ describe('AppService', () => {
   // New Test Cases
   it('should return a string', () => {
     const result = service.getHello();
-    expect(typeof result).toBe('string');
+    expect(typeof result)
+    .toBe('string');
   });
 
   it('should not return an empty string', () => {
