@@ -53,9 +53,11 @@ describe('UserService', () => {
         role: Role.USER, // Use the Role enum here
         access: ['read'],
       };
-      
+
       jest.spyOn(repo, 'findOne').mockResolvedValue(undefined);
-      jest.spyOn(hashingService, 'hashPassword').mockResolvedValue('hashedPassword');
+      jest
+        .spyOn(hashingService, 'hashPassword')
+        .mockResolvedValue('hashedPassword');
       jest.spyOn(repo, 'create').mockReturnValue(registerDto as any);
       jest.spyOn(repo, 'save').mockResolvedValue(registerDto as any);
 
@@ -67,7 +69,9 @@ describe('UserService', () => {
       const registerDto = { email: 'john@example.com' } as any;
       jest.spyOn(repo, 'findOne').mockResolvedValue(registerDto);
 
-      await expect(service.register(registerDto)).rejects.toThrow(ConflictException);
+      await expect(service.register(registerDto)).rejects.toThrow(
+        ConflictException,
+      );
     });
   });
 
@@ -93,7 +97,9 @@ describe('UserService', () => {
       const loginDto = { email: 'john@example.com', password: 'Password123' };
       jest.spyOn(repo, 'findOne').mockResolvedValue(undefined);
 
-      await expect(service.login(loginDto)).rejects.toThrow(UnauthorizedException);
+      await expect(service.login(loginDto)).rejects.toThrow(
+        UnauthorizedException,
+      );
     });
 
     it('should throw unauthorized exception if password invalid', async () => {
@@ -103,7 +109,9 @@ describe('UserService', () => {
       jest.spyOn(repo, 'findOne').mockResolvedValue(user);
       jest.spyOn(hashingService, 'comparePasswords').mockResolvedValue(false);
 
-      await expect(service.login(loginDto)).rejects.toThrow(UnauthorizedException);
+      await expect(service.login(loginDto)).rejects.toThrow(
+        UnauthorizedException,
+      );
     });
   });
 });

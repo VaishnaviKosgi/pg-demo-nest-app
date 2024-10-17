@@ -7,9 +7,9 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { RegisterUserDto } from './dto/register-user.dto';
-import { LoginUserDto } from './dto/login-user.dto';     
-import { User } from './entity/user.entity';            
-import { AuthService } from '../auth/auth.service';     
+import { LoginUserDto } from './dto/login-user.dto';
+import { User } from './entity/user.entity';
+import { AuthService } from '../auth/auth.service';
 import { HashingService } from '../common/hashing.service';
 @Injectable()
 export class UserService {
@@ -27,7 +27,9 @@ export class UserService {
     const { email, password } = registerUserDto;
 
     // Check if user already exists
-    const existingUser = await this.userRepository.findOne({ where: { email } });
+    const existingUser = await this.userRepository.findOne({
+      where: { email },
+    });
     if (existingUser) {
       throw new ConflictException('Email already in use');
     }
@@ -35,14 +37,14 @@ export class UserService {
     // Hash the password using HashingService
     const hashedPassword = await this.hashingService.hashPassword(password);
 
-      // Create new user
-      const user = this.userRepository.create({
-        ...registerUserDto,
-        password: hashedPassword,
-      });
-  
-      return this.userRepository.save(user); // Should return a single User
-    }
+    // Create new user
+    const user = this.userRepository.create({
+      ...registerUserDto,
+      password: hashedPassword,
+    });
+
+    return this.userRepository.save(user); // Should return a single User
+  }
 
   /**
    * User login
@@ -73,23 +75,20 @@ export class UserService {
     return this.userRepository.findOne({ where: { id } });
   }
 
-  
-
-// async findById(id: number): Promise<User | undefined> {
-//   return this.userRepository.findOne({
-//     where: { id },
-//     select: [
-//       'id',
-//       'firstName',
-//       'lastName',
-//       'email',
-//       'mobile',
-//       'countryCode',
-//       'role',
-//       'access',
-//       // Add other fields you want to include
-//     ],
-//   });
-// }
-
+  // async findById(id: number): Promise<User | undefined> {
+  //   return this.userRepository.findOne({
+  //     where: { id },
+  //     select: [
+  //       'id',
+  //       'firstName',
+  //       'lastName',
+  //       'email',
+  //       'mobile',
+  //       'countryCode',
+  //       'role',
+  //       'access',
+  //       // Add other fields you want to include
+  //     ],
+  //   });
+  // }
 }

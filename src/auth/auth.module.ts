@@ -12,17 +12,18 @@ import { CommonModule } from '../common/common.module';
     ConfigModule, // For environment variables
     PassportModule.register({ defaultStrategy: 'jwt' }), // Register Passport with JWT strategy
     JwtModule.registerAsync({
-      imports: [ConfigModule], 
+      imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
-        secret: configService.get<string>('JWT_SECRET') || 'your_jwt_secret_key',
+        secret:
+          configService.get<string>('JWT_SECRET') || 'your_jwt_secret_key',
         signOptions: { expiresIn: '1h' },
       }),
     }),
-    forwardRef(() => UserModule), 
-    CommonModule, 
+    forwardRef(() => UserModule),
+    CommonModule,
   ],
-  providers: [AuthService, JwtStrategy ], 
-  exports: [AuthService], 
+  providers: [AuthService, JwtStrategy],
+  exports: [AuthService],
 })
 export class AuthModule {}

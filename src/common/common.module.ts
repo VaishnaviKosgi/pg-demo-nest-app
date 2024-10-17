@@ -3,6 +3,6 @@ import { HashingService } from './hashing.service';
 
 @Module({
   providers: [HashingService],
-  exports: [HashingService], 
+  exports: [HashingService],
 })
 export class CommonModule {}

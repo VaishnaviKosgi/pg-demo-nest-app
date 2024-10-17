@@ -17,7 +17,7 @@ export class User {
   email: string;
 
   @Column()
-  password: string; 
+  password: string;
 
   @Column()
   mobile: string;
@@ -32,6 +32,6 @@ export class User {
   })
   role: Role;
 
-  @Column("simple-array")
+  @Column('simple-array')
   access: string[];
 }
