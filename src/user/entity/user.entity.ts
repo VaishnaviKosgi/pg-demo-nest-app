@@ -1,31 +1,37 @@
-import { Column, PrimaryGeneratedColumn } from "typeorm";
-import {Role} from '../enums/role.enum'
+// src/user/entity/user.entity.ts
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Role } from '../enums/role.enum';
 
-export class User{
+@Entity()
+export class User {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id:number;
+  @Column({ name: 'first_name' })
+  firstName: string;
 
-    @Column()
-    firstName: string;
+  @Column({ name: 'last_name' })
+  lastName: string;
 
-    @Column()
-    lastName: string;
+  @Column({ unique: true })
+  email: string;
 
+  @Column()
+  password: string; 
 
-    @Column({unique:true})
-    email: string;
+  @Column()
+  mobile: string;
 
-    @Column()
-    mobile:string;
+  @Column({ name: 'country_code' })
+  countryCode: string;
 
-    @Column({
-        type: 'enum',
-        enum:Role ,
-    
-    })
-    role:Role;
+  @Column({
+    type: 'enum',
+    enum: Role,
+    default: Role.USER,
+  })
+  role: Role;
 
-    @Column()
-    access:string[];
+  @Column("simple-array")
+  access: string[];
 }

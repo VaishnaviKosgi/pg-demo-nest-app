@@ -4,6 +4,6 @@ import { Injectable } from '@nestjs/common';
 export class AppService {
   getHello(): string {
     const unusedVar = 'This is not used';
-    return 'PG Demo app!';
+    return  "Hello World!";
   }
 }

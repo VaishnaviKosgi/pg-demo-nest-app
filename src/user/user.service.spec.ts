@@ -9,6 +9,7 @@ import { HashingService } from '../common/hashing.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { ConflictException, UnauthorizedException } from '@nestjs/common';
+import { Role } from './enums/role.enum';
 
 describe('UserService', () => {
   let service: UserService;
@@ -49,10 +50,10 @@ describe('UserService', () => {
         password: 'Password123',
         mobile: '1234567890',
         countryCode: '+1',
-        role: 'USER',
+        role: Role.USER, // Use the Role enum here
         access: ['read'],
       };
-
+      
       jest.spyOn(repo, 'findOne').mockResolvedValue(undefined);
       jest.spyOn(hashingService, 'hashPassword').mockResolvedValue('hashedPassword');
       jest.spyOn(repo, 'create').mockReturnValue(registerDto as any);
