@@ -4,10 +4,10 @@ import { UserSeeder } from './seeders/user.seeder';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  
+
   const userSeeder = app.get(UserSeeder);
-  await userSeeder.seed(); 
-  
+  await userSeeder.seed();
+
   await app.listen(3000);
 }
 bootstrap();

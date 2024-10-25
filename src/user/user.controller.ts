@@ -47,19 +47,19 @@ export class UserController {
     return req.user;
   }
 
- // Admin-only route to get all users
- @UseGuards(JwtAuthGuard, RolesGuard)
- @Roles(Role.ADMIN)
- @Get('admin/users')
- async getAllUsers() {
-   return this.userService.findAllUsers();
- }
+  // Admin-only route to get all users
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.ADMIN)
+  @Get('admin/users')
+  async getAllUsers() {
+    return this.userService.findAllUsers();
+  }
 
- // Route to get a specific user (Admin can see anyone, users can see only their own profile)
- @UseGuards(JwtAuthGuard, RolesGuard)
- @Roles(Role.ADMIN, Role.USER)
- @Get(':userId')
- async getUserById(@Param('userId') userId: string, @Request() req) {
-   return this.userService.findUserById(userId, req.user);
- }
+  // Route to get a specific user (Admin can see anyone, users can see only their own profile)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.ADMIN, Role.USER)
+  @Get(':userId')
+  async getUserById(@Param('userId') userId: string, @Request() req) {
+    return this.userService.findUserById(userId, req.user);
+  }
 }
