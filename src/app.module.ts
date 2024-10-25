@@ -8,6 +8,8 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { CommonModule } from './common/common.module';
+import { UserSeeder } from './seeders/user.seeder';
+import { HashingService } from './common/hashing.service';
 
 @Module({
   imports: [
@@ -28,6 +30,6 @@ import { CommonModule } from './common/common.module';
     CommonModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, UserSeeder, HashingService],
 })
 export class AppModule {}
